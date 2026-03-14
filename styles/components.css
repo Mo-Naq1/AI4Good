@@ -48,6 +48,14 @@ h2 {
   transition:
     color 160ms ease,
     background-color 160ms ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feedback-icon {
+  font-size: 2.5rem;
+  line-height: 1;
 }
 
 .lesson-description.success {
@@ -56,6 +64,20 @@ h2 {
 
 .lesson-description.error {
   color: #b91c1c;
+}
+
+.teach-card {
+  transition: background-color 300ms ease, border-color 300ms ease;
+}
+
+.teach-card.success-card {
+  background-color: #dcfce7;
+  border-color: #4ade80;
+}
+
+.teach-card.error-card {
+  background-color: #fee2e2;
+  border-color: #f87171;
 }
 
 .primary-button,

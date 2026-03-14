@@ -41,6 +41,9 @@
 
 .teach-card {
   padding: 24px;
+  max-height: 90vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .close-teach {
@@ -62,7 +65,7 @@
 }
 
 #lessonCrop {
-  width: min(100%, 280px);
+  width: min(100%, 200px);
   aspect-ratio: 1;
   border-radius: 16px;
   object-fit: cover;

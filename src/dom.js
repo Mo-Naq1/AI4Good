@@ -68,7 +68,21 @@ export function setWorkspaceHint(message) {
 
 export function setLessonDescription(message, tone = "neutral", icon = "") {
   elements.lessonDescription.className = `lesson-description ${tone}`;
-  elements.lessonDescription.textContent = icon ? `${icon} ${message}` : message;
+  if (icon) {
+    elements.lessonDescription.innerHTML = `<span class="feedback-icon">${icon}</span> <span>${message}</span>`;
+  } else {
+    elements.lessonDescription.textContent = message;
+  }
+
+  const teachCard = elements.teachSheet?.querySelector(".teach-card");
+  if (teachCard) {
+    teachCard.classList.remove("success-card", "error-card");
+    if (tone === "success") {
+      teachCard.classList.add("success-card");
+    } else if (tone === "error") {
+      teachCard.classList.add("error-card");
+    }
+  }
 }
 
 export function buildCropDataUrl(bbox) {
