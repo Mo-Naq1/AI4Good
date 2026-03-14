@@ -4,5 +4,6 @@ export const defaultImages = [
   "./default_images/bus.jpg",
   "./default_images/classroom.jpg",
   "./default_images/bike_bench.jpg",
-  "./default_images/car_bins.jpg"
+  "./default_images/coffee_donut.png",
+  "./default_images/dog_frisbee.jpg"
 ];
