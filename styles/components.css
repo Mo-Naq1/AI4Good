@@ -143,3 +143,25 @@ h2 {
 .detection-text {
   line-height: 1;
 }
+
+.default-images-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.default-image-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 160ms ease, transform 160ms ease;
+  box-shadow: var(--shadow);
+}
+
+.default-image-thumb:hover {
+  border-color: var(--accent);
+  transform: scale(1.05);
+}

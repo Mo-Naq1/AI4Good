@@ -10,6 +10,7 @@ import {
 import { stopSpeaking } from "./features/speech.js";
 import { state } from "./state.js";
 import { loadModel } from "./services/model.js";
+import { defaultImages } from "./data/defaultImages.js";
 
 export function initializeApp() {
   wireEvents();
@@ -37,6 +38,18 @@ function wireEvents() {
   elements.slowSpeakButton.addEventListener("click", () => playLesson("slow"));
   elements.beatsButton.addEventListener("click", () => playLesson("beats"));
   elements.recordButton.addEventListener("click", toggleRecording);
+
+  defaultImages.forEach((src) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = "Default sample photo";
+    img.className = "default-image-thumb";
+    img.addEventListener("click", () => handleSceneImage(src));
+    if (elements.defaultImagesGrid) {
+      elements.defaultImagesGrid.appendChild(img);
+    }
+  });
+
   window.addEventListener("resize", () => renderDetections(openLesson));
   window.addEventListener("beforeunload", () => {
     closeCamera();
