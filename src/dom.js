@@ -46,9 +46,9 @@ export function renderBeats(count) {
 }
 
 export function setTalking(active) {
-  elements.lessonDescription.textContent = active
-    ? "Playing audio..."
-    : "Choose an action below.";
+  setLessonDescription(
+    active ? "Playing audio..." : "Choose an action below."
+  );
 }
 
 export function activateBeat(index) {
@@ -63,6 +63,11 @@ export function clearBeatHighlights() {
 
 export function setWorkspaceHint(message) {
   elements.workspaceHint.textContent = message;
+}
+
+export function setLessonDescription(message, tone = "neutral", icon = "") {
+  elements.lessonDescription.className = `lesson-description ${tone}`;
+  elements.lessonDescription.textContent = icon ? `${icon} ${message}` : message;
 }
 
 export function buildCropDataUrl(bbox) {

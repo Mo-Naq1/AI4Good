@@ -36,10 +36,56 @@
           </div>
           <div class="action-row">
             <button class="primary-button" id="cameraButton" type="button">
-              Take Photo
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path
+                    d="M8.5 6.5 10 4h4l1.5 2.5H19A2.5 2.5 0 0 1 21.5 9v8A2.5 2.5 0 0 1 19 19.5H5A2.5 2.5 0 0 1 2.5 17V9A2.5 2.5 0 0 1 5 6.5h3.5Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.8"
+                  />
+                  <circle
+                    cx="12"
+                    cy="13"
+                    r="3.25"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                </svg>
+              </span>
+              <span>Take Photo</span>
             </button>
             <button class="secondary-button" id="uploadButton" type="button">
-              Upload Photo
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path
+                    d="M12 15.5V6.75"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="1.8"
+                  />
+                  <path
+                    d="m8.75 10 3.25-3.25L15.25 10"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.8"
+                  />
+                  <path
+                    d="M5.5 16.5v1A2 2 0 0 0 7.5 19.5h9a2 2 0 0 0 2-2v-1"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="1.8"
+                  />
+                </svg>
+              </span>
+              <span>Upload Photo</span>
             </button>
           </div>
         </section>
@@ -47,13 +93,60 @@
         <section class="workspace hidden" id="workspace">
           <div class="workspace-toolbar" aria-label="Image actions">
             <button class="secondary-button" id="replaceCameraButton" type="button">
-              Use Camera
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path
+                    d="M8.5 6.5 10 4h4l1.5 2.5H19A2.5 2.5 0 0 1 21.5 9v8A2.5 2.5 0 0 1 19 19.5H5A2.5 2.5 0 0 1 2.5 17V9A2.5 2.5 0 0 1 5 6.5h3.5Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.8"
+                  />
+                  <circle
+                    cx="12"
+                    cy="13"
+                    r="3.25"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                </svg>
+              </span>
+              <span>Use Camera</span>
             </button>
             <button class="secondary-button" id="replaceUploadButton" type="button">
-              Upload New Photo
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path
+                    d="M12 15.5V6.75"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="1.8"
+                  />
+                  <path
+                    d="m8.75 10 3.25-3.25L15.25 10"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.8"
+                  />
+                  <path
+                    d="M5.5 16.5v1A2 2 0 0 0 7.5 19.5h9a2 2 0 0 0 2-2v-1"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="1.8"
+                  />
+                </svg>
+              </span>
+              <span>Upload New Photo</span>
             </button>
             <button class="secondary-button" id="resetButton" type="button">
-              Start Over
+              <span aria-hidden="true">↺</span>
+              <span>Start Over</span>
             </button>
           </div>
           <div class="viewer-frame">
@@ -105,7 +198,8 @@
           id="closeTeachButton"
           type="button"
         >
-          Close
+          <span aria-hidden="true">✖</span>
+          <span>Close</span>
         </button>
         <div class="lesson-header">
           <p class="eyebrow">Lesson</p>
@@ -118,19 +212,19 @@
         <div class="beat-row" id="beatRow" aria-hidden="true"></div>
         <div class="lesson-controls">
           <button class="lesson-button" id="speakButton" type="button">
-            <strong>Hear Word</strong>
+            <strong><span aria-hidden="true">👂</span> Hear Word</strong>
             <span>Play at normal speed</span>
           </button>
           <button class="lesson-button" id="slowSpeakButton" type="button">
-            <strong>Hear Slowly</strong>
+            <strong><span aria-hidden="true">🐢</span> Hear Slowly</strong>
             <span>Play a slower version</span>
           </button>
           <button class="lesson-button" id="beatsButton" type="button">
-            <strong>Sound It Out</strong>
+            <strong><span aria-hidden="true">🐢</span> Sound It Out</strong>
             <span>Hear each beat, then the full word</span>
           </button>
           <button class="lesson-button" id="recordButton" type="button">
-            <strong>Check My Pronunciation</strong>
+            <strong><span aria-hidden="true">🎤</span> Check My Pronunciation</strong>
             <span>Say the word and get instant feedback</span>
           </button>
         </div>

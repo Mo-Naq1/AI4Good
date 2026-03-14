@@ -114,7 +114,16 @@ export function renderDetections(openLesson) {
     button.style.height = `${clipped.height}px`;
     button.setAttribute("aria-label", `Learn ${item.word}`);
     const label = document.createElement("span");
-    label.textContent = item.word;
+    const icon = document.createElement("span");
+    icon.className = "detection-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = item.icon;
+
+    const text = document.createElement("span");
+    text.className = "detection-text";
+    text.textContent = item.word;
+
+    label.append(icon, text);
     button.appendChild(label);
     button.addEventListener("click", () => openLesson(index));
     elements.detectionLayer.appendChild(button);
@@ -135,7 +144,8 @@ function normalizePrediction(prediction) {
     score: prediction.score,
     bbox: prediction.bbox,
     word: commonObject.word,
-    beats: commonObject.beats
+    beats: commonObject.beats,
+    icon: commonObject.icon || "📍"
   };
 }
 

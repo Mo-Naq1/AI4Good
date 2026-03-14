@@ -1,4 +1,4 @@
-import { elements } from "../dom.js";
+import { elements, setLessonDescription } from "../dom.js";
 import { state } from "../state.js";
 import { stopSpeaking } from "./speech.js";
 
@@ -129,6 +129,15 @@ function cleanupRecognition(recognition) {
   elements.recordButton.classList.remove("recording");
 }
 
+function applyPronunciationFeedback(feedback) {
+  if (feedback.score >= 92) {
+    setLessonDescription(`${feedback.message} Score: ${feedback.score}%.`, "success", "😊");
+    return;
+  }
+
+  setLessonDescription(`${feedback.message} Score: ${feedback.score}%.`, "error", "☹️");
+}
+
 export function updateRecordingAvailability() {
   const supported = Boolean(getRecognitionConstructor());
 
@@ -146,12 +155,12 @@ export async function toggleRecording() {
 
   const Recognition = getRecognitionConstructor();
   if (!Recognition) {
-    elements.lessonDescription.textContent = "Pronunciation check is not available on this device.";
+    setLessonDescription("Pronunciation check is not available on this device.", "error", "☹️");
     return;
   }
 
   if (!state.currentLesson?.word) {
-    elements.lessonDescription.textContent = "Open a lesson before checking pronunciation.";
+    setLessonDescription("Open a lesson before checking pronunciation.", "error", "☹️");
     return;
   }
 
@@ -176,7 +185,7 @@ export async function toggleRecording() {
 
       const latestResult = event.results[event.results.length - 1];
       if (!latestResult?.isFinal && transcript) {
-        elements.lessonDescription.textContent = `Listening... I hear "${normalizePhrase(transcript)}".`;
+        setLessonDescription(`Listening... I hear "${normalizePhrase(transcript)}".`, "neutral", "🎤");
       }
     };
 
@@ -185,16 +194,16 @@ export async function toggleRecording() {
       cleanupRecognition(recognition);
 
       if (event.error === "no-speech") {
-        elements.lessonDescription.textContent = `I couldn't hear "${state.currentLesson.word}". Try again.`;
+        setLessonDescription(`I couldn't hear "${state.currentLesson.word}". Try again.`, "error", "☹️");
         return;
       }
 
       if (event.error === "not-allowed" || event.error === "service-not-allowed") {
-        elements.lessonDescription.textContent = "Microphone permission is blocked for pronunciation checks.";
+        setLessonDescription("Microphone permission is blocked for pronunciation checks.", "error", "☹️");
         return;
       }
 
-      elements.lessonDescription.textContent = "Pronunciation check failed. Try again.";
+      setLessonDescription("Pronunciation check failed. Try again.", "error", "☹️");
     };
 
     recognition.onend = () => {
@@ -207,25 +216,25 @@ export async function toggleRecording() {
       }
 
       if (!state.currentLesson?.word) {
-        elements.lessonDescription.textContent = "Choose an action below.";
+        setLessonDescription("Choose an action below.");
         return;
       }
 
       const feedback = evaluatePronunciation(state.lastTranscript, state.currentLesson.word);
-      elements.lessonDescription.textContent = `${feedback.message} Score: ${feedback.score}%.`;
+      applyPronunciationFeedback(feedback);
       state.lastTranscript = "";
     };
 
     state.speechRecognition = recognition;
     elements.recordButton.classList.add("recording");
-    elements.lessonDescription.textContent = `Listening... say "${state.currentLesson.word}".`;
+    setLessonDescription(`Listening... say "${state.currentLesson.word}".`, "neutral", "🎤");
     recognition.start();
     state.recordTimeout = window.setTimeout(() => {
       stopRecording();
     }, 2500);
   } catch (error) {
     console.error("Pronunciation check unavailable", error);
-    elements.lessonDescription.textContent = "Pronunciation check could not start.";
+    setLessonDescription("Pronunciation check could not start.", "error", "☹️");
   }
 }
 
@@ -236,7 +245,7 @@ export function stopRecording() {
     if (!state.currentLesson) {
       return;
     }
-    elements.lessonDescription.textContent = "Choose an action below.";
+    setLessonDescription("Choose an action below.");
     return;
   }
 

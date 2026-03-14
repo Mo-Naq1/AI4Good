@@ -1,7 +1,8 @@
 import {
   buildCropDataUrl,
   elements,
-  renderBeats
+  renderBeats,
+  setLessonDescription
 } from "../dom.js";
 import { state } from "../state.js";
 import { stopRecording } from "./recording.js";
@@ -16,7 +17,7 @@ export function openLesson(index) {
   state.currentLesson = lesson;
   elements.lessonCrop.src = buildCropDataUrl(lesson.bbox);
   elements.lessonTitle.textContent = lesson.word;
-  elements.lessonDescription.textContent = "Choose an action below.";
+  setLessonDescription("Choose an action below.");
   renderBeats(lesson.beats.length);
   elements.teachSheet.classList.remove("hidden");
   playLesson("normal");
@@ -39,6 +40,6 @@ export async function playLesson(mode) {
     return;
   }
 
-  const rate = mode === "slow" ? 0.62 : 0.9;
+  const rate = mode === "slow" ? 0.42 : 0.9;
   await playWord(state.currentLesson.word, rate);
 }
