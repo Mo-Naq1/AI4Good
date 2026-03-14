@@ -12,7 +12,7 @@ export const COMMON_OBJECTS = {
   bicycle: objectEntry("bike", ["bike"], "🚲"),
   bird: objectEntry("bird", ["bird"], "🐦"),
   book: objectEntry("book", ["book"], "📘"),
-  bottle: objectEntry("bottle", ["bot", "tle"], "🍼"),
+  bottle: objectEntry("bottle", ["bot", "tul"], "🍼"),
   bowl: objectEntry("bowl", ["bowl"], "🥣"),
   broccoli: objectEntry("broccoli", ["bro", "cco", "li"], "🥦"),
   bus: objectEntry("bus", ["bus"], "🚌"),
