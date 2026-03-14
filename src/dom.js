@@ -25,7 +25,8 @@ export const elements = {
   speakButton: document.getElementById("speakButton"),
   slowSpeakButton: document.getElementById("slowSpeakButton"),
   beatsButton: document.getElementById("beatsButton"),
-  recordButton: document.getElementById("recordButton")
+  recordButton: document.getElementById("recordButton"),
+  defaultImagesGrid: document.getElementById("defaultImagesGrid")
 };
 
 export function showLoader(visible) {
