@@ -4,7 +4,8 @@ export const state = {
   activeStream: null,
   currentImage: null,
   currentLesson: null,
-  mediaRecorder: null,
-  recordChunks: [],
+  speechRecognition: null,
+  recognitionErrored: false,
+  lastTranscript: "",
   recordTimeout: null
 };
