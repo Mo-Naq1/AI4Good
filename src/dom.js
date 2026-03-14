@@ -1,14 +1,16 @@
 export const elements = {
   emptyState: document.getElementById("emptyState"),
   workspace: document.getElementById("workspace"),
+  workspaceHint: document.getElementById("workspaceHint"),
   sceneImage: document.getElementById("sceneImage"),
   detectionLayer: document.getElementById("detectionLayer"),
   loadingOverlay: document.getElementById("loadingOverlay"),
   uploadInput: document.getElementById("uploadInput"),
   cameraButton: document.getElementById("cameraButton"),
   uploadButton: document.getElementById("uploadButton"),
-  cameraChoice: document.getElementById("cameraChoice"),
-  uploadChoice: document.getElementById("uploadChoice"),
+  replaceCameraButton: document.getElementById("replaceCameraButton"),
+  replaceUploadButton: document.getElementById("replaceUploadButton"),
+  resetButton: document.getElementById("resetButton"),
   cameraSheet: document.getElementById("cameraSheet"),
   cameraPreview: document.getElementById("cameraPreview"),
   closeCameraButton: document.getElementById("closeCameraButton"),
@@ -16,8 +18,9 @@ export const elements = {
   captureCanvas: document.getElementById("captureCanvas"),
   teachSheet: document.getElementById("teachSheet"),
   closeTeachButton: document.getElementById("closeTeachButton"),
+  lessonTitle: document.getElementById("lessonTitle"),
+  lessonDescription: document.getElementById("lessonDescription"),
   lessonCrop: document.getElementById("lessonCrop"),
-  mouthOrb: document.getElementById("mouthOrb"),
   beatRow: document.getElementById("beatRow"),
   speakButton: document.getElementById("speakButton"),
   slowSpeakButton: document.getElementById("slowSpeakButton"),
@@ -43,7 +46,9 @@ export function renderBeats(count) {
 }
 
 export function setTalking(active) {
-  elements.mouthOrb.classList.toggle("talking", active);
+  elements.lessonDescription.textContent = active
+    ? "Playing audio..."
+    : "Choose an action below.";
 }
 
 export function activateBeat(index) {
@@ -54,6 +59,10 @@ export function activateBeat(index) {
 
 export function clearBeatHighlights() {
   Array.from(elements.beatRow.children).forEach((dot) => dot.classList.remove("active"));
+}
+
+export function setWorkspaceHint(message) {
+  elements.workspaceHint.textContent = message;
 }
 
 export function buildCropDataUrl(bbox) {

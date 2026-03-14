@@ -14,35 +14,10 @@
   </head>
   <body>
     <div class="app-shell">
-      <header class="topbar" aria-label="App controls">
-        <div class="brand-mark" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="topbar-actions">
-          <button
-            class="icon-button"
-            id="cameraButton"
-            aria-label="Take a picture"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M7 7h2.2l1.1-1.7h3.4L14.8 7H17a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3Zm5 11a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0-2a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"
-              />
-            </svg>
-          </button>
-          <button
-            class="icon-button"
-            id="uploadButton"
-            aria-label="Upload a picture"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M12 4 7.5 8.5l1.4 1.4 2.1-2.1V16h2V7.8l2.1 2.1 1.4-1.4L12 4Zm-6 13h12v2H6v-2Z"
-              />
-            </svg>
-          </button>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">AI4Good</p>
+          <h1>Object Learner</h1>
         </div>
       </header>
 
@@ -52,42 +27,35 @@
           id="emptyState"
           aria-label="Choose image source"
         >
-          <div class="hero-orbit" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
+          <div class="empty-copy">
+            <h2>Add a photo to start</h2>
+            <p>
+              Take a picture or upload one. Then tap any object box to hear and
+              practice the word.
+            </p>
           </div>
-          <div class="choice-row">
-            <button
-              class="choice-card"
-              id="cameraChoice"
-              aria-label="Take a picture"
-            >
-              <div class="choice-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M7 7h2.2l1.1-1.7h3.4L14.8 7H17a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3Zm5 11a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0-2a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"
-                  />
-                </svg>
-              </div>
+          <div class="action-row">
+            <button class="primary-button" id="cameraButton" type="button">
+              Take Photo
             </button>
-            <button
-              class="choice-card"
-              id="uploadChoice"
-              aria-label="Upload a picture"
-            >
-              <div class="choice-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M12 4 7.5 8.5l1.4 1.4 2.1-2.1V16h2V7.8l2.1 2.1 1.4-1.4L12 4Zm-6 13h12v2H6v-2Z"
-                  />
-                </svg>
-              </div>
+            <button class="secondary-button" id="uploadButton" type="button">
+              Upload Photo
             </button>
           </div>
         </section>
 
         <section class="workspace hidden" id="workspace">
+          <div class="workspace-toolbar" aria-label="Image actions">
+            <button class="secondary-button" id="replaceCameraButton" type="button">
+              Use Camera
+            </button>
+            <button class="secondary-button" id="replaceUploadButton" type="button">
+              Upload New Photo
+            </button>
+            <button class="secondary-button" id="resetButton" type="button">
+              Start Over
+            </button>
+          </div>
           <div class="viewer-frame">
             <img id="sceneImage" alt="Uploaded scene" />
             <div class="detection-layer" id="detectionLayer"></div>
@@ -96,13 +64,12 @@
               id="loadingOverlay"
               aria-live="polite"
             >
-              <div class="radar" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
+              <p>Finding objects...</p>
             </div>
           </div>
+          <p class="workspace-hint" id="workspaceHint">
+            Tap an object box to open the lesson.
+          </p>
         </section>
       </main>
     </div>
@@ -116,23 +83,11 @@
       <div class="camera-stage">
         <video id="cameraPreview" autoplay playsinline muted></video>
         <div class="camera-controls">
-          <button
-            class="icon-button secondary"
-            id="closeCameraButton"
-            aria-label="Close camera"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="m6.4 5 5.6 5.6L17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4 6.4 5Z"
-              />
-            </svg>
+          <button class="secondary-button" id="closeCameraButton" type="button">
+            Cancel
           </button>
-          <button
-            class="capture-button"
-            id="captureButton"
-            aria-label="Capture image"
-          >
-            <span></span>
+          <button class="primary-button" id="captureButton" type="button">
+            Capture
           </button>
         </div>
       </div>
@@ -146,63 +101,37 @@
     >
       <div class="teach-card">
         <button
-          class="icon-button secondary close-teach"
+          class="secondary-button close-teach"
           id="closeTeachButton"
-          aria-label="Close lesson"
+          type="button"
         >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="m6.4 5 5.6 5.6L17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4 6.4 5Z"
-            />
-          </svg>
+          Close
         </button>
+        <div class="lesson-header">
+          <p class="eyebrow">Lesson</p>
+          <h2 id="lessonTitle">Object</h2>
+          <p id="lessonDescription">Choose an action below.</p>
+        </div>
         <div class="teach-visual">
           <img id="lessonCrop" alt="Selected object" />
-          <div class="mouth-orb" id="mouthOrb" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
         </div>
         <div class="beat-row" id="beatRow" aria-hidden="true"></div>
         <div class="lesson-controls">
-          <button class="lesson-button" id="speakButton" aria-label="Hear word">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M5 9v6h4l5 4V5L9 9H5Zm11.5 3a4.5 4.5 0 0 0-2.2-3.9v7.8a4.5 4.5 0 0 0 2.2-3.9Zm0-8v2.2a8 8 0 0 1 0 11.6V20a10 10 0 0 0 0-16Z"
-              />
-            </svg>
+          <button class="lesson-button" id="speakButton" type="button">
+            <strong>Hear Word</strong>
+            <span>Play at normal speed</span>
           </button>
-          <button
-            class="lesson-button"
-            id="slowSpeakButton"
-            aria-label="Hear slowly"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M4 12a8 8 0 1 0 8-8v2a6 6 0 1 1-6 6H4Zm9-4v5l4 2 .8-1.8-2.8-1.4V8h-2Z"
-              />
-            </svg>
+          <button class="lesson-button" id="slowSpeakButton" type="button">
+            <strong>Hear Slowly</strong>
+            <span>Play a slower version</span>
           </button>
-          <button
-            class="lesson-button"
-            id="beatsButton"
-            aria-label="Hear sounds in parts"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 18h2V8H5v10Zm6 0h2V5h-2v13Zm6 0h2v-8h-2v8Z" />
-            </svg>
+          <button class="lesson-button" id="beatsButton" type="button">
+            <strong>Sound It Out</strong>
+            <span>Hear each beat, then the full word</span>
           </button>
-          <button
-            class="lesson-button"
-            id="recordButton"
-            aria-label="Record your voice"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M12 15a3 3 0 0 0 3-3V7a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3Zm-1 2.9V20H8v2h8v-2h-3v-2.1a6 6 0 0 0 5-5.9h-2a4 4 0 0 1-8 0H6a6 6 0 0 0 5 5.9Z"
-              />
-            </svg>
+          <button class="lesson-button" id="recordButton" type="button">
+            <strong>Record Myself</strong>
+            <span>Record and play back your voice</span>
           </button>
         </div>
       </div>

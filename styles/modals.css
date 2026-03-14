@@ -4,19 +4,18 @@
   inset: 0;
   display: grid;
   place-items: center;
-  padding: 24px;
-  background: rgba(12, 16, 14, 0.56);
-  backdrop-filter: blur(12px);
+  padding: 16px;
+  background: rgba(23, 23, 23, 0.45);
   z-index: 40;
 }
 
 .camera-stage,
 .teach-card {
   position: relative;
-  width: min(920px, 100%);
-  border-radius: 32px;
-  overflow: hidden;
-  background: var(--panel-strong);
+  width: min(760px, 100%);
+  border-radius: 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
   box-shadow: var(--shadow);
 }
 
@@ -26,138 +25,91 @@
 
 #cameraPreview {
   width: 100%;
-  max-height: 72vh;
+  max-height: 68vh;
   object-fit: cover;
-  border-radius: 24px;
-  background: #101614;
+  border-radius: 14px;
+  background: #111111;
 }
 
 .camera-controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: 16px;
   padding-top: 16px;
 }
 
-.capture-button {
-  display: grid;
-  place-items: center;
-  width: 92px;
-  height: 92px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--accent), #ff9f5a);
-  box-shadow: var(--shadow);
-}
-
-.capture-button span {
-  width: 42px;
-  height: 42px;
-  border-radius: 999px;
-  background: white;
-}
-
 .teach-card {
-  padding: 28px;
+  padding: 24px;
 }
 
 .close-teach {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 24px;
+  right: 24px;
   z-index: 2;
 }
 
-.teach-visual {
+.lesson-header {
   display: grid;
-  gap: 20px;
-  justify-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-right: 100px;
+}
+
+.teach-visual {
+  margin-bottom: 20px;
 }
 
 #lessonCrop {
-  width: min(100%, 360px);
+  width: min(100%, 280px);
   aspect-ratio: 1;
-  border-radius: 28px;
+  border-radius: 16px;
   object-fit: cover;
-  background: linear-gradient(160deg, rgba(255, 252, 247, 0.94), rgba(228, 213, 183, 0.92));
-}
-
-.mouth-orb {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 132px;
-  height: 132px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--sea), #8ad5c8);
-  box-shadow: var(--shadow);
-}
-
-.mouth-orb span {
-  position: absolute;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.22);
-}
-
-.mouth-orb span:nth-child(1) {
-  width: 78px;
-  height: 78px;
-}
-
-.mouth-orb span:nth-child(2) {
-  width: 40px;
-  height: 18px;
-  background: rgba(17, 38, 36, 0.82);
-}
-
-.mouth-orb span:nth-child(3) {
-  width: 96px;
-  height: 96px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
+  border: 1px solid var(--line);
+  background: var(--panel-muted);
 }
 
 .beat-row {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   min-height: 18px;
-  padding: 24px 0 12px;
+  padding: 0 0 16px;
 }
 
 .beat {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   border-radius: 999px;
-  background: rgba(21, 33, 29, 0.18);
-  transform: scale(0.92);
+  background: #d4d4d4;
 }
 
 .beat.active {
-  background: linear-gradient(135deg, var(--accent), var(--gold));
-  transform: scale(1.18);
+  background: #111111;
 }
 
 .lesson-controls {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 8px;
 }
 
 .lesson-button {
   display: grid;
-  place-items: center;
-  min-height: 92px;
-  border-radius: 24px;
+  gap: 6px;
+  justify-items: start;
+  min-height: 88px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
   color: var(--ink);
-  background:
-    linear-gradient(160deg, rgba(255, 252, 247, 0.94), rgba(230, 221, 199, 0.9));
-  box-shadow: var(--shadow);
+  background: var(--panel);
+  text-align: left;
 }
 
 .lesson-button.recording {
   color: white;
-  background: linear-gradient(135deg, #c23d35, #ef746b);
+  border-color: #b91c1c;
+  background: #dc2626;
 }

@@ -2,6 +2,7 @@ import { COMMON_OBJECTS } from "../data/commonObjects.js";
 import {
   clearDetections,
   elements,
+  setWorkspaceHint,
   showLoader
 } from "../dom.js";
 import { state } from "../state.js";
@@ -67,8 +68,13 @@ export function renderDetections(openLesson) {
   clearDetections();
 
   if (!state.currentImage?.detections?.length) {
+    if (state.currentImage) {
+      setWorkspaceHint("No supported objects found. Try a different photo.");
+    }
     return;
   }
+
+  setWorkspaceHint("Tap an object box to open the lesson.");
 
   const frameRect = elements.detectionLayer.getBoundingClientRect();
   const naturalWidth = elements.sceneImage.naturalWidth;
@@ -78,17 +84,17 @@ export function renderDetections(openLesson) {
     return;
   }
 
-  const scale = Math.max(frameRect.width / naturalWidth, frameRect.height / naturalHeight);
+  const scale = Math.min(frameRect.width / naturalWidth, frameRect.height / naturalHeight);
   const renderedWidth = naturalWidth * scale;
   const renderedHeight = naturalHeight * scale;
-  const cropX = Math.max(0, (renderedWidth - frameRect.width) / 2);
-  const cropY = Math.max(0, (renderedHeight - frameRect.height) / 2);
+  const offsetX = Math.max(0, (frameRect.width - renderedWidth) / 2);
+  const offsetY = Math.max(0, (frameRect.height - renderedHeight) / 2);
 
   state.currentImage.detections.forEach((item, index) => {
     const [x, y, width, height] = item.bbox;
     const clipped = clipRect(
-      x * scale - cropX,
-      y * scale - cropY,
+      x * scale + offsetX,
+      y * scale + offsetY,
       width * scale,
       height * scale,
       frameRect.width,
@@ -107,6 +113,9 @@ export function renderDetections(openLesson) {
     button.style.width = `${clipped.width}px`;
     button.style.height = `${clipped.height}px`;
     button.setAttribute("aria-label", `Learn ${item.word}`);
+    const label = document.createElement("span");
+    label.textContent = item.word;
+    button.appendChild(label);
     button.addEventListener("click", () => openLesson(index));
     elements.detectionLayer.appendChild(button);
   });
@@ -360,6 +369,16 @@ function buildSceneContext(detections) {
 }
 
 function relabelFromContext(item, detections, scene) {
+  if (item.key === "clock" && looksLikeSmokeDetector(item, scene)) {
+    return {
+      ...item,
+      key: "smoke_detector",
+      word: COMMON_OBJECTS.smoke_detector.word,
+      beats: COMMON_OBJECTS.smoke_detector.beats,
+      score: Math.min(0.99, item.score + 0.04)
+    };
+  }
+
   if (item.key !== "cup") {
     return item;
   }
@@ -406,6 +425,25 @@ function hasNearbyLabel(item, detections, labels) {
 
     return normalizedCenterDistance(item.bbox, other.bbox) <= 0.22;
   }) || false;
+}
+
+function looksLikeSmokeDetector(item, scene) {
+  const [x, y, width, height] = item.bbox;
+  const areaRatio = (width * height) / scene.imageArea;
+  const aspectRatio = width / Math.max(height, 1);
+  const centerYRatio = (y + height / 2) / state.currentImage.height;
+  const topEdgeRatio = y / state.currentImage.height;
+  const rightEdgeRatio = (x + width) / state.currentImage.width;
+
+  return (
+    areaRatio <= 0.02 &&
+    aspectRatio >= 0.75 &&
+    aspectRatio <= 1.33 &&
+    centerYRatio <= 0.22 &&
+    topEdgeRatio <= 0.14 &&
+    rightEdgeRatio >= 0.18 &&
+    rightEdgeRatio <= 0.92
+  );
 }
 
 function clipRect(x, y, width, height, maxWidth, maxHeight) {

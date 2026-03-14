@@ -1,71 +1,68 @@
 .app-shell {
   min-height: 100vh;
-  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
 }
 
 .topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.topbar-actions {
-  display: flex;
-  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .stage {
-  display: grid;
-  place-items: center;
-  min-height: calc(100vh - 112px);
+  min-height: calc(100vh - 120px);
 }
 
 .empty-state,
 .workspace {
-  width: min(1120px, 100%);
+  width: 100%;
 }
 
 .empty-state {
-  position: relative;
   display: grid;
-  place-items: center;
-  min-height: 70vh;
-  border-radius: 36px;
+  gap: 24px;
+  justify-items: start;
+  min-height: 320px;
   padding: 32px;
-  background: rgba(255, 249, 238, 0.46);
-  backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--panel);
   box-shadow: var(--shadow);
-  overflow: hidden;
 }
 
-.choice-row {
+.empty-copy {
+  display: grid;
+  gap: 12px;
+  max-width: 560px;
+}
+
+.action-row,
+.workspace-toolbar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  gap: 12px;
 }
 
 .workspace {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  gap: 16px;
 }
 
 .viewer-frame {
   position: relative;
   width: 100%;
-  height: clamp(420px, calc(100vh - 180px), 960px);
-  border-radius: 32px;
+  height: min(70vh, 760px);
+  border-radius: 20px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid var(--line);
+  background: var(--panel);
   box-shadow: var(--shadow);
 }
 
 #sceneImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 }
 
@@ -74,24 +71,23 @@
   inset: 0;
 }
 
+.workspace-hint {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 @media (max-width: 760px) {
   .app-shell {
-    padding: 16px;
-  }
-
-  .choice-card {
-    width: min(42vw, 180px);
-    border-radius: 24px;
-  }
-
-  .choice-icon {
-    width: 88px;
-    height: 88px;
+    padding: 16px 12px 24px;
   }
 
   .viewer-frame {
-    height: clamp(340px, calc(100vh - 150px), 720px);
+    height: 56vh;
     border-radius: 24px;
+  }
+
+  .empty-state {
+    padding: 24px;
   }
 
   .teach-card {
@@ -99,15 +95,6 @@
   }
 
   .lesson-controls {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .lesson-button {
-    min-height: 82px;
-  }
-
-  .capture-button {
-    width: 82px;
-    height: 82px;
+    grid-template-columns: 1fr;
   }
 }

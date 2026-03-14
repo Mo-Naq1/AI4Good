@@ -1,13 +1,12 @@
 :root {
-  --bg: #f1ede3;
-  --bg-strong: #e6d8bc;
-  --panel: rgba(255, 250, 240, 0.78);
-  --panel-strong: rgba(255, 248, 234, 0.92);
-  --ink: #15211d;
-  --accent: #d95d39;
-  --sea: #2f7f7f;
-  --gold: #dfa93d;
-  --shadow: 0 24px 60px rgba(21, 33, 29, 0.16);
+  --bg: #f5f5f5;
+  --panel: #ffffff;
+  --panel-muted: #f0f0f0;
+  --ink: #171717;
+  --muted: #5c5c5c;
+  --line: #d7d7d7;
+  --accent: #111111;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -23,10 +22,7 @@ body {
   margin: 0;
   font-family: "Space Grotesk", sans-serif;
   color: var(--ink);
-  background:
-    radial-gradient(circle at top left, rgba(223, 169, 61, 0.35), transparent 34%),
-    radial-gradient(circle at bottom right, rgba(47, 127, 127, 0.28), transparent 36%),
-    linear-gradient(135deg, #f7f2e8 0%, var(--bg) 52%, #efe4d0 100%);
+  background: var(--bg);
 }
 
 button,
@@ -35,10 +31,16 @@ input {
 }
 
 button {
-  border: 0;
+  border: 1px solid transparent;
   background: none;
   padding: 0;
   cursor: pointer;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
 }
 
 img,

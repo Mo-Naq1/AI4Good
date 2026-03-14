@@ -15,6 +15,8 @@ export function openLesson(index) {
 
   state.currentLesson = lesson;
   elements.lessonCrop.src = buildCropDataUrl(lesson.bbox);
+  elements.lessonTitle.textContent = lesson.word;
+  elements.lessonDescription.textContent = "Choose an action below.";
   renderBeats(lesson.beats.length);
   elements.teachSheet.classList.remove("hidden");
   playLesson("normal");
